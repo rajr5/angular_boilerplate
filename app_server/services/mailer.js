@@ -13,8 +13,8 @@ function getTransporter() {
 
 
 exports.sendMail = function(emailTo, emailSubject, emailText, emailHtml, emailFrom) {
-  return new Promise(function(resolve, reject){
-    emailFrom = emailFrom || 'support@atgdevelopment.net';
+  return new Promise((resolve, reject) => {
+    emailFrom = emailFrom || 'support@myapp.net';
     var transporter = getTransporter();
     var mailOptions = {
       to: emailTo,
