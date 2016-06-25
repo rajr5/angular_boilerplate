@@ -4,6 +4,8 @@ This is a boilerplate mean application using Node, Express, Angular, mongo (mlab
 ## seting up dev environment
 1. Download the repo and run `npm install`
 2. create a .env file in the root directory with the following paramters
+  - MAILGUN_USERNAME
+  - MAILGUN_PASSWORD
   - MONGODB
   - TOKEN_SECRET
 3. MongoDB connection string can be local or hosted (e.x. mongolab)
@@ -60,6 +62,8 @@ Run either 'npm start
 *only Heroku instructions included*
 1. Create a heroku application
 2. Set global variables on heroku using CLI or the web console.
+  - MAILGUN_USERNAME
+  - MAILGUN_PASSWORD
   - MONGODB
   - TOKEN_SECRET
 3. [Follow Heroku instructions here for setting a remote](https://devcenter.heroku.com/articles/git#creating-a-heroku-remote)
