@@ -1,4 +1,4 @@
-# Stock Mean Application
+# Stock Angular Application
 This is a boilerplate mean application using Node, Express, Angular, mongo (mlab), Heroku, Gulp
 
 ## seting up dev environment
