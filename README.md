@@ -60,6 +60,7 @@ Run either 'npm start
 
 ## deploying
 *only Heroku instructions included*
+
 1. Create a heroku application
 2. Set global variables on heroku using CLI or the web console.
   - MAILGUN_USERNAME
