@@ -26,12 +26,8 @@ var sendJson = function(res, status, content) {
    */
 module.exports.getUsers = function(req, res) {
   userService.getUsers()
-  .then(function(data) {
-    sendJson(res, 200, data);
-  })
-  .catch(function(err){
-    sendJson(res, 400, err);
-  });
+  .then(data => sendJson(res, 200, data))
+  .catch(err => sendJson(res, 400, err));
 };
 
 
@@ -48,16 +44,12 @@ module.exports.getUsers = function(req, res) {
     var errors = req.validationErrors();
 
     if (errors) {
-      return res.status(400).send(errors);
+      return sendJson(res, 400, errors);
     }
 
     userService.login(req.body.email, req.body.password)
-    .then(function(data) {
-      sendJson(res, 201, data);
-    })
-    .catch(function(err){
-      sendJson(res, 400, err);
-    });
+    .then(data => sendJson(res, 201, data))
+    .catch(err => sendJson(res, 400, err));
   };
 
 /**
@@ -73,16 +65,12 @@ module.exports.signupPost = function(req, res) {
   var errors = req.validationErrors();
 
   if (errors) {
-    return res.status(400).send(errors);
+    return sendJson(res, 400, errors);
   }
 
   userService.signup(req.body.name, req.body.email, req.body.password, true, req.headers.host)
-  .then(function(data) {
-    sendJson(res, 201, data);
-  })
-  .catch(function(err){
-    sendJson(res, 400, err);
-  });
+  .then(data => sendJson(res, 201, data))
+  .catch(err => sendJson(res, 400, err));
 
 };
 
@@ -93,12 +81,8 @@ module.exports.signupPost = function(req, res) {
 module.exports.activateAccount = function(req, res) {
   // find account with token
   userService.activateAccount(req.params.token)
-  .then(function(data) {
-    sendJson(res, 201, data);
-  })
-  .catch(function(err){
-    sendJson(res, 400, err);
-  });
+  .then(data => sendJson(res, 201, data))
+  .catch(err => sendJson(res, 400, err));
 };
 
 
@@ -119,16 +103,12 @@ module.exports.accountPut = function(req, res) {
   var errors = req.validationErrors();
 
   if (errors) {
-    return res.status(400).send(errors);
+    return sendJson(res, 400, errors);
   }
 
   userService.updateAccount(req.user.id, req.body.email, req.body.name, req.body.location, req.body.password)
-  .then(function(data) {
-    sendJson(res, 203, data);
-  })
-  .catch(function(err){
-    sendJson(res, 400, err);
-  });
+  .then(data =>sendJson(res, 203, data))
+  .catch(err => sendJson(res, 400, err));
 
 };
 
@@ -137,12 +117,8 @@ module.exports.accountPut = function(req, res) {
  */
 module.exports.accountDelete = function(req, res) {
   userService.deleteAcct(req.user.id)
-  .then(function(data) {
-    sendJson(res, 204, data);
-  })
-  .catch(function(err){
-    sendJson(res, 400, err);
-  });
+  .then(data => sendJson(res, 204, data))
+  .catch(err => sendJson(res, 400, err));
 };
 
 
@@ -157,15 +133,11 @@ module.exports.forgotPost = function(req, res) {
   var errors = req.validationErrors();
 
   if (errors) {
-    return res.status(400).send(errors);
+    return sendJson(res, 400, errors);
   }
   userService.forgot(req.body.email, req.headers.host)
-  .then(function(data) {
-    sendJson(res, 204, data);
-  })
-  .catch(function(err){
-    sendJson(res, 400, err);
-  });
+  .then(data => sendJson(res, 204, data))
+  .catch(err => sendJson(res, 400, err));
 };
 
 /**
@@ -181,10 +153,6 @@ module.exports.resetPost = function(req, res) {
       return sendJson(res, 400, errors);
   }
   userService.reset(req.params.token, req.body.password)
-  .then(function(data) {
-    sendJson(res, 201, data);
-  })
-  .catch(function(err){
-    sendJson(res, 400, err);
-  });
+  .then(data => sendJson(res, 201, data))
+  .catch(err => sendJson(res, 400, err));
 };

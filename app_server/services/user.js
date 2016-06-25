@@ -20,7 +20,7 @@ function generateToken(user) {
  * May want to restrict this
  */
 module.exports.getUsers = function() {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     User
     .find({})
     .select('_id name email location active')
@@ -38,7 +38,7 @@ module.exports.getUsers = function() {
  * Login
  */
 module.exports.login = function(email, password) {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     User.findOne({ email: email }, (err, user) => {
       if (!user) {
         return reject({ msg: 'The email address ' + email + ' is not associated with any account. ' +
@@ -60,7 +60,7 @@ module.exports.login = function(email, password) {
  * Create a new user
  */
 module.exports.signup = function(name, email, password, isActive, host) {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     User.findOne({ email: email }, (err, user) => {
       if (user) {
         return reject({ msg: 'The email address you have entered is already associated with another account.'});
@@ -127,7 +127,7 @@ module.exports.signup = function(name, email, password, isActive, host) {
  * Activate account
  */
 module.exports.activateAccount = function(token) {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     User.findOne({ activationToken: token })
     .where('activationTokenExpires').gt(Date.now())
     .exec((err, user) => {
@@ -152,7 +152,7 @@ module.exports.activateAccount = function(token) {
  * Update account.  If password provided, that will be the only update, otherwise all other fields updated.
  */
 module.exports.updateAccount = function(id, email, name, location, password) {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     User.findById(id, (err, user) => {
       if (password) {
         user.password = password;
@@ -181,7 +181,7 @@ module.exports.updateAccount = function(id, email, name, location, password) {
  * Delete account
  */
 module.exports.deleteAcct = function(id) {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     User.remove({ _id: id }, (err) => {
       if (err) {
         return reject({msg: 'Error deleting account', error: err});
@@ -195,7 +195,7 @@ module.exports.deleteAcct = function(id) {
  * Forgot password
  */
 module.exports.forgot = function(email, host) {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     new Promise((resolve, reject) => {
       crypto.randomBytes(16, (err, buf) =>{
         var token = buf.toString('hex');
@@ -242,7 +242,7 @@ module.exports.forgot = function(email, host) {
  * Reset Password
  */
 module.exports.reset = function(token, password) {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     User.findOne({ passwordResetToken: token })
     .where('passwordResetExpires').gt(Date.now())
     .exec((err, user) => {
